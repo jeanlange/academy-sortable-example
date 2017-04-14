@@ -2,7 +2,7 @@ here are all my notes:
 
 <div id="sortable">
   <% @notes.each do |note| %>
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="<%= note.id %>">
       <div class="panel-body">
         <%= note.text %>
       </div>
@@ -14,7 +14,27 @@ here are all my notes:
 
 <script>
   $( function() {
-      $( "#sortable" ).sortable();
+      $( "#sortable" ).sortable({
+          update: function( event, ui ) {
+            let new_order = $( "#sortable" ).sortable('toArray');
+            console.log(new_order);
+            // for each note
+            
+            for(i = 0; i < new_order.length; i++) {
+              //console.log(i);
+              //console.log(new_order[i]); 
+              // go to '/notes/i/update_order/new_order[i]'
+              let url = "/notes/" + new_order[i] + "/update_order/" + i
+              $.ajax({
+                url: url
+              })
+              .done(function( html ) {
+                console.log("updated one");
+              });
+            }
+          }
+        }
+      );
       $( "#sortable" ).disableSelection();
   } );
 </script>
