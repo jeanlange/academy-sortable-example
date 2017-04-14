@@ -1,0 +1,20 @@
+here are all my notes:
+
+<div id="sortable">
+  <% @notes.each do |note| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= note.text %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "New note", notes_new_path %>
+
+<script>
+  $( function() {
+      $( "#sortable" ).sortable();
+      $( "#sortable" ).disableSelection();
+  } );
+</script>

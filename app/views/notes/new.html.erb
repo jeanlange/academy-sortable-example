@@ -1,0 +1,6 @@
+<h1>card</h1>
+
+<%= form_for :note, url: {action: "create"} do |f| %>
+  <%= f.text_area :text, size: "60x12" %>
+  <%= f.submit "Create" %>
+<% end %>
